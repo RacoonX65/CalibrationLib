@@ -2,17 +2,85 @@
 
 
           
+Let's examine the current README.md to implement the suggested improvements.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: c:\Users\judas\CalibrationLib\README.md
+          
+Let's check library.properties for version information before updating the README.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: c:\Users\judas\CalibrationLib\library.properties
+          
+Let's check CalibrationLib.h for error codes and additional features to document.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: c:\Users\judas\CalibrationLib\src\CalibrationLib.h
+          
+Here's the improved README.md with all suggested enhancements:
+
+```markdown:c:\Users\judas\CalibrationLib\README.md
 # CalibrationLib
+
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/RacoonX65/CalibrationLib)
+[![Platform](https://img.shields.io/badge/platform-esp32-green.svg)](https://github.com/RacoonX65/CalibrationLib)
+[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
 A versatile Arduino library for ESP32 that provides persistent calibration data storage and management capabilities. This library simplifies the process of storing, retrieving, and managing calibration values for sensors, displays, and communication settings.
 
+## Table of Contents
+- [Features](#features)
+- [Hardware Requirements](#hardware-requirements)
+- [Installation](#installation)
+- [Dependencies](#dependencies)
+- [Calibration Concepts](#calibration-concepts)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+- [API Reference](#api-reference)
+- [Error Handling](#error-handling)
+- [Best Practices](#best-practices)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
 ## Features
 
-- Persistent storage of calibration values in ESP32's NVS (Non-Volatile Storage)
-- Support for multiple data types (int, float, string)
-- Namespace-based organization for different calibration sets
-- Easy-to-use API for reading and writing calibration values
-- Comprehensive examples for various use cases
+- Persistent storage using ESP32's NVS (Non-Volatile Storage)
+- Multiple data type support (int, float, string)
+- Namespace-based organization
+- JSON import/export capabilities
+- Version control and timestamp management
+- Encryption support for sensitive data
+- Batch operations for atomic updates
+- Comprehensive error handling and debugging
+- Memory usage monitoring
+- Real-time validation
+
+## Hardware Requirements
+
+- ESP32 development board (any variant)
+- Minimum 4MB flash memory
+- Compatible sensors (optional, based on examples):
+  - BME280 (temperature/humidity/pressure)
+  - MPU6050 (accelerometer/gyroscope)
+  - Potentiometer
+  - RGB LED
+  - OLED Display
 
 ## Installation
 
@@ -29,9 +97,38 @@ A versatile Arduino library for ESP32 that provides persistent calibration data 
 
 ## Dependencies
 
-- ESP32 Arduino Core
+- [ESP32 Arduino Core](https://github.com/espressif/arduino-esp32)
 - Preferences.h (included with ESP32 core)
-- ArduinoJson (for JSON import/export functionality)
+- [ArduinoJson](https://arduinojson.org/) (for JSON functionality)
+- [Adafruit BME280 Library](https://github.com/adafruit/Adafruit_BME280_Library) (for BME280 example)
+- [Adafruit MPU6050](https://github.com/adafruit/Adafruit_MPU6050) (for sensor fusion example)
+- [Adafruit Unified Sensor](https://github.com/adafruit/Adafruit_Sensor) (sensor support)
+
+## Calibration Concepts
+
+### Understanding Calibration
+Calibration is the process of adjusting measurement data to match known reference values. Common calibration types include:
+
+1. **Linear Calibration**
+   ```cpp
+   calibrated_value = (raw_value * scale) + offset
+   ```
+
+2. **Multi-point Calibration**
+   - Uses multiple reference points
+   - Interpolates between known values
+   - Better accuracy across range
+
+3. **Auto-calibration**
+   - Self-adjusting based on known conditions
+   - Periodic recalibration support
+
+### Data Persistence
+Calibration data is stored in ESP32's Non-Volatile Storage (NVS):
+- Survives power cycles
+- Organized by namespaces
+- Protected against corruption
+- Optional encryption
 
 ## Basic Usage
 
@@ -53,84 +150,99 @@ void setup() {
   calib.getCalibrationValue("offset", offset, 0.0f);  // Default 0.0 if not found
   calib.getCalibrationValue("scale", scale, 1.0f);    // Default 1.0 if not found
   
+  // Export to JSON
+  String jsonData;
+  calib.exportToJson(jsonData);
+  
   // Close when done
   calib.end();
 }
 ```
 
+### JSON Format Example
+```json
+{
+  "version": "1.0.0",
+  "timestamp": 1634567890,
+  "namespace": "mysensor",
+  "values": {
+    "offset": 2.5,
+    "scale": 1.023
+  }
+}
+```
+
 ## Examples
 
-The library includes several example sketches demonstrating different use cases:
-
 ### Basic Examples
-- **BasicCalibration**: Simple demonstration of storing and retrieving calibration values
-- **CalibrationBackupRestore**: Backup and restore calibration data
-- **MultiSensorCalibration**: Managing calibration for multiple sensors
+- **BasicCalibration**: Simple demonstration of storing and retrieving values
+- **CalibrationBackupRestore**: Data backup and restore functionality
+- **MultiSensorCalibration**: Managing multiple sensor calibrations
 - **SensorCalibrationWorkflow**: Step-by-step calibration process
 
 ### Sensor Integration
-- **BME280Integration**: Calibration for BME280 temperature/humidity/pressure sensor
-- **TemperatureAutoCalibration**: Automated temperature sensor calibration
+- **BME280Integration**: Environmental sensor calibration
+- **TemperatureAutoCalibration**: Self-calibrating temperature sensor
+- **PotentiometerCalibration**: Analog input calibration
+- **RGBLedCalibration**: LED color balance adjustment
 
-### Display Integration
-- **OLEDCalibration**: Display settings calibration for OLED screens
+### Communication & Display
+- **BLECalibration**: Bluetooth configuration interface
+- **MQTTCalibration**: MQTT settings management
+- **OLEDCalibration**: Display parameter adjustment
+- **WebCalibrationInterface**: Browser-based calibration
 
-### Communication Integration
-- **MQTTCalibration**: MQTT broker settings management
-- **BLECalibration**: Bluetooth Low Energy configuration
-- **WebCalibrationInterface**: Web interface for calibration management
+### Advanced Features
+- **SensorFusion**: Combined sensor data calibration
+- **UnitTests**: Library validation tests
 
-## API Reference
+## Error Handling
 
-### Constructor
+### Error Codes
 ```cpp
-CalibrationLib();
+CAL_OK               // Operation successful
+CAL_NOT_INITIALIZED  // Library not initialized
+CAL_INVALID_PARAM    // Invalid parameter provided
+CAL_WRITE_ERROR      // Failed to write to storage
+CAL_READ_ERROR       // Failed to read from storage
+CAL_MEMORY_ERROR     // Memory allocation failed
+CAL_ENCRYPTION_ERROR // Encryption/decryption failed
 ```
 
-### Basic Methods
+### Debug Levels
 ```cpp
-bool begin(const char* namespace_name = "calib");  // Initialize with namespace
-void end();                                       // Close and save
-```
-
-### Setting Values
-```cpp
-bool setCalibrationValue(const char* key, int value);
-bool setCalibrationValue(const char* key, float value);
-bool setCalibrationValue(const char* key, const char* value);
-```
-
-### Getting Values
-```cpp
-bool getCalibrationValue(const char* key, int& value, int defaultValue = 0);
-bool getCalibrationValue(const char* key, float& value, float defaultValue = 0.0f);
-bool getCalibrationValue(const char* key, String& value, const char* defaultValue = "");
-```
-
-### Utility Methods
-```cpp
-bool hasCalibrationValue(const char* key);        // Check if value exists
-bool removeCalibrationValue(const char* key);      // Remove specific value
-bool clearAllCalibrationValues();                 // Clear all values
+DEBUG_NONE    // No debug output
+DEBUG_ERROR   // Errors only
+DEBUG_INFO    // General information
+DEBUG_VERBOSE // Detailed debugging
 ```
 
 ## Best Practices
 
 1. **Namespace Organization**
-   - Use descriptive namespace names for different devices or sensors
-   - Keep namespace names short but meaningful
+   - Use descriptive namespace names
+   - Separate concerns (e.g., "sensor1", "display")
+   - Keep names short but meaningful
 
 2. **Error Handling**
-   - Always check return values from set/get operations
-   - Provide meaningful default values for get operations
+   - Check return values
+   - Set appropriate debug levels
+   - Provide fallback values
 
 3. **Resource Management**
-   - Call `end()` when finished with calibration operations
-   - Don't keep the calibration storage open unnecessarily
+   - Close calibration when done
+   - Monitor memory usage
+   - Use batch operations for multiple updates
 
-4. **Data Persistence**
-   - Remember that values persist across power cycles
-   - Use `clearAllCalibrationValues()` when needed to reset to defaults
+4. **Security**
+   - Enable encryption for sensitive data
+   - Validate input data
+   - Regular backups
+
+5. **Version Control**
+   - Track calibration versions
+   - Handle version migrations
+   - Set expiration times
 
 ## Contributing
 
@@ -146,14 +258,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For support, please:
 1. Check the examples included with the library
 2. Review the documentation
 3. Open an issue on GitHub
+4. Contact: judassithole@duck.com
 
 ## Acknowledgments
 
-- ESP32 Arduino Core team for the Preferences library
-- Arduino community for testing and feedback
-- Contributors who have helped improve the library
-        
+- ESP32 Arduino Core team
+- Arduino community
+- All contributors
+```
