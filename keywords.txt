@@ -1,0 +1,65 @@
+# Classes and Types
+CalibrationLib	KEYWORD1
+CalibrationError	KEYWORD1
+DebugLevel	KEYWORD1
+
+# Core Methods
+begin	KEYWORD2
+end	KEYWORD2
+getCalibrationValue	KEYWORD2
+setCalibrationValue	KEYWORD2
+hasCalibrationValue	KEYWORD2
+removeCalibrationValue	KEYWORD2
+clearAllCalibrationValues	KEYWORD2
+
+# Debug and Error Handling
+setDebugLevel	KEYWORD2
+setDebugOutput	KEYWORD2
+getLastError	KEYWORD2
+getErrorString	KEYWORD2
+
+# Validation and Memory Management
+validateKey	KEYWORD2
+validateValue	KEYWORD2
+getFreeSpace	KEYWORD2
+getUsedSpace	KEYWORD2
+
+# Batch Operations
+batchBegin	KEYWORD2
+batchCommit	KEYWORD2
+batchRollback	KEYWORD2
+
+# Security
+enableEncryption	KEYWORD2
+disableEncryption	KEYWORD2
+
+# JSON Support
+exportToJson	KEYWORD2
+importFromJson	KEYWORD2
+
+# Versioning and Timestamps
+setCalibrationVersion	KEYWORD2
+getCalibrationVersion	KEYWORD2
+isCalibrationOutdated	KEYWORD2
+setCalibrationTimestamp	KEYWORD2
+getCalibrationTimestamp	KEYWORD2
+isCalibrationExpired	KEYWORD2
+
+# Legacy Methods
+saveCalibration	KEYWORD2
+loadCalibration	KEYWORD2
+
+# Debug Levels
+DEBUG_NONE	LITERAL1
+DEBUG_ERROR	LITERAL1
+DEBUG_INFO	LITERAL1
+DEBUG_VERBOSE	LITERAL1
+
+# Error Codes
+CAL_OK	LITERAL1
+CAL_NOT_INITIALIZED	LITERAL1
+CAL_INVALID_PARAM	LITERAL1
+CAL_WRITE_ERROR	LITERAL1
+CAL_READ_ERROR	LITERAL1
+CAL_MEMORY_ERROR	LITERAL1
+CAL_ENCRYPTION_ERROR	LITERAL1
