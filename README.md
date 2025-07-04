@@ -3,7 +3,7 @@
 [![Arduino Library Manager](https://www.ardu-badge.com/badge/CalibrationLib.svg)](https://www.ardu-badge.com/CalibrationLib)
 [![Arduino Library Specification](https://img.shields.io/badge/Arduino%20Library%20Specification-1.5-blue)](https://arduino.github.io/arduino-cli/latest/library-specification/)
 [![Arduino Library CI](https://img.shields.io/badge/Arduino%20Library%20CI-passing-brightgreen)](https://github.com/arduino/arduino-lint)
-[![Release](https://img.shields.io/badge/release-v1.0.1-blue)](https://github.com/arduino/arduino-lint)
+[![Release](https://img.shields.io/badge/release-v1.0.0-blue)](https://github.com/arduino/arduino-lint)
 
 A versatile Arduino library for ESP32 that provides persistent calibration data storage and management capabilities. This library simplifies the process of storing, retrieving, and managing calibration values for sensors, displays, and communication settings.
 
