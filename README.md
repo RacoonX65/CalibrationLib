@@ -3,12 +3,16 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/RacoonX65/CalibrationLib)
 [![Platform](https://img.shields.io/badge/platform-esp32-green.svg)](https://github.com/RacoonX65/CalibrationLib)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+[![Arduino Library Manager](https://img.shields.io/badge/Arduino%20Library%20Manager-pending-orange.svg)](https://www.arduino.cc/reference/en/libraries/)
+[![Build Status](https://img.shields.io/github/workflow/status/RacoonX65/CalibrationLib/arduino-lint/main)](https://github.com/RacoonX65/CalibrationLib/actions)
+[![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://github.com/RacoonX65/CalibrationLib#readme)
 
 A versatile Arduino library for ESP32 that provides persistent calibration data storage and management capabilities. This library simplifies the process of storing, retrieving, and managing calibration values for sensors, displays, and communication settings.
 
 ## Table of Contents
 - [Features](#features)
 - [Hardware Requirements](#hardware-requirements)
+- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Dependencies](#dependencies)
 - [Calibration Concepts](#calibration-concepts)
@@ -17,9 +21,14 @@ A versatile Arduino library for ESP32 that provides persistent calibration data 
 - [API Reference](#api-reference)
 - [Error Handling](#error-handling)
 - [Best Practices](#best-practices)
+- [Compatibility Matrix](#compatibility-matrix)
+- [Memory Usage](#memory-usage)
+- [Troubleshooting](#troubleshooting)
+- [Security Considerations](#security-considerations)
 - [Contributing](#contributing)
 - [License](#license)
 - [Support](#support)
+- [Changelog](#changelog)
 
 ## Features
 
@@ -33,6 +42,9 @@ A versatile Arduino library for ESP32 that provides persistent calibration data 
 - Comprehensive error handling and debugging
 - Memory usage monitoring
 - Real-time validation
+- Backup/restore functionality
+- Cross-platform compatibility
+- Structured data format support
 
 ## Hardware Requirements
 
@@ -44,6 +56,26 @@ A versatile Arduino library for ESP32 that provides persistent calibration data 
   - Potentiometer
   - RGB LED
   - OLED Display
+
+## Quick Start
+
+```cpp
+#include <CalibrationLib.h>
+
+void setup() {
+    CalibrationLib calib;
+    calib.begin("quickstart");
+    
+    // Store a calibration value
+    calib.setCalibrationValue("sensor_offset", 1.5f);
+    
+    // Read it back
+    float offset;
+    calib.getCalibrationValue("sensor_offset", offset);
+    
+    Serial.printf("Calibration offset: %.2f\n", offset);
+}
+```
 
 ## Installation
 
@@ -231,4 +263,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - ESP32 Arduino Core team
 - Arduino community
 - All contributors
-```
