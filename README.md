@@ -1,9 +1,6 @@
 # CalibrationLib
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/RacoonX65/CalibrationLib)
-[![Platform](https://img.shields.io/badge/platform-esp32-green.svg)](https://github.com/RacoonX65/CalibrationLib)
-[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
-[![Library Manager](https://img.shields.io/badge/Library%20Manager-CalibrationLib%201.0.0-green)](https://www.arduino.cc/reference/en/libraries/)
+[![Arduino Library Manager](https://www.ardu-badge.com/badge/CalibrationLib.svg)](https://www.ardu-badge.com/CalibrationLib)
 [![Arduino Library Specification](https://img.shields.io/badge/Arduino%20Library%20Specification-1.5-blue)](https://arduino.github.io/arduino-cli/latest/library-specification/)
 [![Arduino Library CI](https://img.shields.io/badge/Arduino%20Library%20CI-passing-brightgreen)](https://github.com/arduino/arduino-lint)
 
