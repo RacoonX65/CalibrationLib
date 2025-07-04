@@ -6,8 +6,6 @@
 [![Library Manager](https://img.shields.io/badge/Library%20Manager-LightweightIoT%201.0.0-green)](https://www.arduino.cc/reference/en/libraries/)
 [![Arduino Library Specification](https://img.shields.io/badge/Arduino%20Library%20Specification-1.5-blue)](https://arduino.github.io/arduino-cli/latest/library-specification/)
 [![Arduino Library CI](https://img.shields.io/badge/Arduino%20Library%20CI-passing-brightgreen)](https://github.com/arduino/arduino-lint)
-[![Build Status](https://img.shields.io/github/workflow/status/RacoonX65/CalibrationLib/arduino-lint/main)](https://github.com/RacoonX65/CalibrationLib/actions)
-[![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://github.com/RacoonX65/CalibrationLib#readme)
 
 A versatile Arduino library for ESP32 that provides persistent calibration data storage and management capabilities. This library simplifies the process of storing, retrieving, and managing calibration values for sensors, displays, and communication settings.
 
